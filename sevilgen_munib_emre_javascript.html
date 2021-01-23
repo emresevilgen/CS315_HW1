@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<script>
+x = "x of global";// Can't delete this line because Reference error in foo
+y = "y of global"
+
+function foo() {
+    console.log("\nWhile entering foo: " + x + ", " + y);
+    x = "x of foo";
+    var y = "var y of foo";
+    console.log("In foo: " + x + ", " + y);
+
+    function foo1() {
+   	    console.log("\nWhile entering foo1: " + x + ", " + y);
+        var x = "x of foo1";
+        y = "y of foo1";
+        console.log("In foo1: " + x + ", " + y);
+
+        function foo1_1() {
+         	console.log("\nWhile entering foo1_1: " + x + ", " + y);
+            x = "x of foo1_1";
+            y = "y of foo1_1";
+         	console.log("While exiting foo1_1: " + x + ", " + y);
+        }
+
+        foo1_1();
+        console.log("After foo1_1 in foo1: " + x + ", " + y);
+        foo2();
+        console.log("While exiting foo1: " + x + ", " + y);
+    }
+
+    function foo2() {
+       	console.log("\nWhile entering foo2: " + x + ", " + y);
+        x = "x of foo2";
+        y = "y of foo2";
+        console.log("While exiting foo2: " + x + ", " + y);
+        foo3();
+    }
+
+    function foo3() {
+ 	   	console.log("\nWhile entering foo3: " + x + ", " + y);
+        x = "x of foo3";
+        y = "y of foo3";
+        console.log("While exiting foo3: " + x + ", " + y);
+    }
+
+    foo1();
+    console.log("After foo1 in foo: " + x + ", " + y);
+    foo2();
+    console.log("While exiting foo: " + x + ", " + y);
+}
+
+foo();
+
+console.log("\nIn global: " + x + ", " + y);
+
+</script>
+</body>
+</html>
